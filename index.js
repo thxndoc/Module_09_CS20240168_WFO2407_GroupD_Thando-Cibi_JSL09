@@ -9,6 +9,10 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
     .then(data => {
         document.body.style.backgroundImage = `url(${data.urls.full})`
         //display author's name
-        author.textContent = `By: ${data.user.name}`
+        author.textContent = `Photo by: ${data.user.name}`
+    })
+    .catch(err => {
+        document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-1613679169453-ef00f3730ed4?crop=entropy&cs=srgb&fm=jpg&ixid=M3wxNDI0NzB8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MjcyNzM2NjF8&ixlib=rb-4.0.3&q=85)`
+        author.textContent = `Photo by: Wolfgang Hasselmann`
     })
 
