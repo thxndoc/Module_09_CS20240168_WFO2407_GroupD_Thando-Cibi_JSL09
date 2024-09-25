@@ -30,7 +30,6 @@ main {
 div.top {
     display: flex;
     justify-content: space-between;
-    border: 1px solid red;
 }
 
 h1.time {
@@ -56,7 +55,6 @@ div#crypto-top > span {
 }
 
 div#weather {
-    border: 1px solid red;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
