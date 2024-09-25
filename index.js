@@ -19,7 +19,12 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
 // Pull down cryptocurrency data for dogecoin from the CoinGecko API
 // https://api.coingecko.com/api/v3/coins/dogecoin
 fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw Error("Something went wrong")
+        }
+        return response.json()
+    })
     .then(data => console.log(data))
     .catch(err => console.error(err))
 
