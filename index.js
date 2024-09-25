@@ -1,6 +1,7 @@
 const author = document.getElementById("author")
 const cryptoTop = document.getElementById("crypto-top")
 const crypto = document.getElementById("crypto");
+const time = document.getElementById("time")
 
 //Get a random image from Unsplash and set it as the background
 // URL: https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature
@@ -58,3 +59,26 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
     })
     .catch(err => console.error(err))
 
+//display current time as the following format: 17:30
+function getCurrentTime() {
+    const date = new Date()
+    document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
+}
+
+//update time every second
+setInterval(getCurrentTime, 1000)
+
+//get current position
+navigator.geolocation.getCurrentPosition(position => {
+    fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`)
+        .then(response => {
+            if (!response.ok) {
+                throw Error("Weather data not available")
+            }
+            return response.json()
+        })
+        .then(data => {
+            console.log(data)
+        })
+        .catch(err => console.error(err))
+});
