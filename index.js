@@ -1,8 +1,8 @@
-const author = document.getElementById("author")
-const cryptoTop = document.getElementById("crypto-top")
-const crypto = document.getElementById("crypto")
-const time = document.getElementById("time")
-const weather = document.getElementById("weather")
+const author = document.getElementById("author");
+const cryptoTop = document.getElementById("crypto-top");
+const crypto = document.getElementById("crypto");
+const time = document.getElementById("time");
+const weather = document.getElementById("weather");
 
 // Get a random image from Unsplash and set it as the background
 // URL: https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature
@@ -11,13 +11,13 @@ const weather = document.getElementById("weather")
 fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=textures-patterns")
     .then(response => response.json())
     .then(data => {
-        document.body.style.backgroundImage = `url(${data.urls.full})`
+        document.body.style.backgroundImage = `url(${data.urls.full})`;
         //display author's name
-        author.textContent = `Photo by: ${data.user.name}`
+        author.textContent = `Photo by: ${data.user.name}`;
     })
     .catch(err => {
-        document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-1613679169453-ef00f3730ed4?crop=entropy&cs=srgb&fm=jpg&ixid=M3wxNDI0NzB8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MjcyNzM2NjF8&ixlib=rb-4.0.3&q=85)`
-        author.textContent = `Photo by: Wolfgang Hasselmann`
+        document.body.style.backgroundImage = `url(https://images.unsplash.com/photo-1613679169453-ef00f3730ed4?crop=entropy&cs=srgb&fm=jpg&ixid=M3wxNDI0NzB8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MjcyNzM2NjF8&ixlib=rb-4.0.3&q=85)`;
+        author.textContent = `Photo by: Wolfgang Hasselmann`;
     })
 
 // Pull down cryptocurrency data for dogecoin from the CoinGecko API
@@ -63,11 +63,11 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
 // Display current time as the following format: 17:30
 function getCurrentTime() {
     const date = new Date()
-    document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
+    time.textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
 }
 
 // Update time every second
-setInterval(getCurrentTime, 1000)
+setInterval(getCurrentTime, 1000);
 
 // Get current position
 navigator.geolocation.getCurrentPosition(position => {
@@ -81,10 +81,21 @@ navigator.geolocation.getCurrentPosition(position => {
         .then(data => {
             console.log(data)
             // Display weather icon
-            const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
-            const icon = document.createElement("img")
+            const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+            const icon = document.createElement("img");
             icon.src = iconUrl;
             weather.appendChild(icon);
+
+            //Display temperature
+            const temperatureEl = document.createElement("p");
+            temperatureEl.textContent = `${Math.round(data.main.temp)} ºC`;
+            weather.appendChild(temperatureEl);
+
+            //Display name of area
+            const locationEl = document.createElement("p");
+            locationEl.textContent = `${data.name}`;
+            weather.appendChild(locationEl);
+
         })
         .catch(err => console.error(err))
 });
