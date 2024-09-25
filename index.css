@@ -10,4 +10,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    text-shadow: 1px 1px 2px #474747;
 }
