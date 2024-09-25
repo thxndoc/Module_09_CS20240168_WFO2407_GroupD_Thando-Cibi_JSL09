@@ -89,11 +89,13 @@ navigator.geolocation.getCurrentPosition(position => {
             //Display temperature
             const temperatureEl = document.createElement("p");
             temperatureEl.textContent = `${Math.round(data.main.temp)} ºC`;
+            temperatureEl.classList.add("temperature")
             weather.appendChild(temperatureEl);
 
             //Display name of area
             const locationEl = document.createElement("p");
             locationEl.textContent = `${data.name}`;
+            locationEl.classList.add("city")
             weather.appendChild(locationEl);
 
         })
