@@ -1,5 +1,7 @@
 const author = document.getElementById("author")
 const cryptoTop = document.getElementById("crypto-top")
+const crypto = document.getElementById("crypto");
+
 //Get a random image from Unsplash and set it as the background
 // URL: https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature
 // (Change the "query" at the end to preferred theme)
@@ -26,17 +28,33 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
         return response.json()
     })
     .then(data => {
-        // Create image element
+        // Create image element and append to cryptoTop div
         const imgEl = document.createElement("img");
         imgEl.src = data.image.small;
+        cryptoTop.appendChild(imgEl);
 
-        // Create span element
+        // Create span element and append to cryptoTop div
         const spanEl = document.createElement("span");
         spanEl.textContent = data.name;
-
-        // Append the image and span to the cryptoTop div
-        cryptoTop.appendChild(imgEl);
         cryptoTop.appendChild(spanEl);
+
+        
+        // Create current price paragraph element and append to crypto div
+        const currentPriceEl = document.createElement("p");
+        currentPriceEl.textContent = `🎯: $${data.market_data.current_price.usd}`;
+        crypto.appendChild(currentPriceEl);
+        
+
+        // Create high price paragraph element and append to crypto div
+        const highPriceEl = document.createElement("p");
+        highPriceEl.textContent = `👆: $${data.market_data.high_24h.usd}`;
+        crypto.appendChild(highPriceEl);
+
+        // Create low price paragraph element and append to crypto div
+        const lowPriceEl = document.createElement("p");
+        lowPriceEl.textContent = `👇: $${data.market_data.low_24h.usd}`;
+        crypto.appendChild(lowPriceEl);
+
     })
     .catch(err => console.error(err))
 
