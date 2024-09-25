@@ -1,9 +1,10 @@
 const author = document.getElementById("author")
 const cryptoTop = document.getElementById("crypto-top")
-const crypto = document.getElementById("crypto");
+const crypto = document.getElementById("crypto")
 const time = document.getElementById("time")
+const weather = document.getElementById("weather")
 
-//Get a random image from Unsplash and set it as the background
+// Get a random image from Unsplash and set it as the background
 // URL: https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature
 // (Change the "query" at the end to preferred theme)
 // Change the body's backgroundImage to: `url(<insert the URL of the image from the API here>)`
@@ -59,16 +60,16 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
     })
     .catch(err => console.error(err))
 
-//display current time as the following format: 17:30
+// Display current time as the following format: 17:30
 function getCurrentTime() {
     const date = new Date()
     document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
 }
 
-//update time every second
+// Update time every second
 setInterval(getCurrentTime, 1000)
 
-//get current position
+// Get current position
 navigator.geolocation.getCurrentPosition(position => {
     fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`)
         .then(response => {
@@ -79,6 +80,11 @@ navigator.geolocation.getCurrentPosition(position => {
         })
         .then(data => {
             console.log(data)
+            // Display weather icon
+            const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+            const icon = document.createElement("img")
+            icon.src = iconUrl;
+            weather.appendChild(icon);
         })
         .catch(err => console.error(err))
 });
