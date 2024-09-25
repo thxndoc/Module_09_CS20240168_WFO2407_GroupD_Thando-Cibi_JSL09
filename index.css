@@ -10,9 +10,6 @@ html, body {
      -https://css-tricks.com/perfect-full-page-background-image/#awesome-easy-progressive-css3-way)*/
 body {
     background: no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
     color: white;
     font-family: "Roboto", sans-serif;
