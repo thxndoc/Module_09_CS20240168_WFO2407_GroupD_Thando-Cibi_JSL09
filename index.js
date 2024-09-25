@@ -1,5 +1,5 @@
 const author = document.getElementById("author")
-
+const cryptoTop = document.getElementById("crypto-top")
 //Get a random image from Unsplash and set it as the background
 // URL: https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature
 // (Change the "query" at the end to preferred theme)
@@ -25,6 +25,18 @@ fetch("https://api.coingecko.com/api/v3/coins/dogecoin")
         }
         return response.json()
     })
-    .then(data => console.log(data))
+    .then(data => {
+        // Create image element
+        const imgEl = document.createElement("img");
+        imgEl.src = data.image.small;
+
+        // Create span element
+        const spanEl = document.createElement("span");
+        spanEl.textContent = data.name;
+
+        // Append the image and span to the cryptoTop div
+        cryptoTop.appendChild(imgEl);
+        cryptoTop.appendChild(spanEl);
+    })
     .catch(err => console.error(err))
 
